@@ -1,0 +1,68 @@
+<div class='row'>
+  <div class='col-sm-2 col-xs-2 product-header'>
+    <h1>Ideas</h1>
+  </div>
+</div>
+<div class='row'>
+  <hr />
+</div>
+<div class='idea'>
+  <%@ideas.each do |idea|%>
+    <div class='row'>
+      <div class='col-xs-offset-2 col-sm-offset-2 col-xs-6 col-sm-6'>
+        <p>
+          <%=link_to idea_path(idea) do%>
+            <b><%=idea.title%></b>
+          <%end%>
+        </p>
+      </div>
+    </div>
+
+    <div class='inner-spacing'/>
+
+    <div class='row'>
+      <div class='col-xs-2 col-sm-2'>
+        <p style='text-align: right;'>
+
+          <%=idea.created_at.strftime("%Y-%m-%d %H:%M")%>
+        </p>
+      </div>
+      <div class='col-xs-8 col-sm-8'>
+        <p>
+          <%=idea.body%>
+        </p>
+      </div>
+    </div>
+
+    <div class='row'>
+      <div class='col-xs-offset-2 col-sm-offset-2 col-xs-2 col-sm-2'>
+        By <%=idea.user.full_name%>
+      </div>
+    </div>
+
+    <div class='btn-spacing'/>
+
+    <div class='row' style='margin-top: 0.5em;'>
+      <div class='col-xs-offset-2 col-sm-offset-2 col-xs-3 col-sm-3'>
+        <div class='btn-group' role='group'>
+          <%user_member = idea.member_for(current_user)%>
+          <%if user_member.present?%>
+            <%= link_to "Unfollow", idea_member_path(idea, user_member), method: :delete, class: 'btn btn-default btn-xs'%>
+          <%else%>
+            <%=link_to "Follow", idea_members_path(idea), method: :post, class: 'btn btn-default btn-xs'%>
+          <%end%>
+          <%user_like = idea.like_for(current_user)%>
+          <%if user_like.present?%>
+            <%= link_to "Dislike", idea_like_path(idea, user_like), method: :delete, class: 'btn btn-default btn-xs'%>
+          <%else%>
+            <%=link_to "Like", idea_likes_path(idea), method: :post, class: 'btn btn-default btn-xs'%>
+          <%end%>
+        </div>
+      </div>
+    </div>
+
+    <div class='spacing'/>
+
+    <hr />
+  <%end%>
+</div>

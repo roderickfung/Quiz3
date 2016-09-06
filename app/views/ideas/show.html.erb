@@ -1,0 +1,118 @@
+
+<div class='row'>
+  <div class='product-header'>
+    <div class='col-xs-offset-2 col-sm-offset-2 col-xs-6 col-sm-6'>
+      <div class='title'>
+        <h3><%=@idea.title%></h3>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class='row'>
+  <div class='col-xs-offset-2 col-sm-offset-2 col-xs-3 col-sm-3'>
+    <h5>
+      By <%=@idea.user.full_name%>
+    </h5>
+  </div>
+</div>
+
+<div class='row'>
+  <div class='col-xs-offset-2 col-sm-offset-2 col-xs-3 col-sm-3'>
+    Last Updated: <%=@idea.updated_at%>
+  </div>
+</div>
+
+<div class='row'>
+  <div class='product-body'>
+    <div class='col-xs-offset-1 col-sm-offset-1 col-xs-1 col-sm-1'>
+      <%=link_to 'Back', root_path, class:'btn btn-default' %>
+    </div>
+    <div class='col-xs-8 col-sm-8'>
+        <p>
+          <%=@idea.body%>
+        </p>
+    </div>
+    <div class='col-xs-2 col-sm-2'>
+      <p>
+        Members Currently Following:
+        <%@idea.members.each do |m|%>
+          <%=m.user.full_name%>
+        <%end%>
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class='spacing'></div>
+
+<div class='row'>
+  <div class='col-xs-offset-2 col-sm-offset-2 col-xs-1 col-sm-1'>
+    <p><%=@idea.likes.count%> Like(s)</p>
+
+  </div>
+  <div class='col-xs-2 col-sm-2'>
+    <p><%=@idea.members.count%> Member(s)</p>
+  </div>
+</div>
+
+<div class='btn-spacing'></div>
+
+<div class='row'>
+  <div class='col-xs-offset-2 col-sm-offset-2 col-xs-3 col-sm-3'>
+    <div class='btn-group' role='group'>
+      <%= link_to 'Edit', edit_idea_path(@idea), class: 'btn btn-default btn-sm'%>
+      <%user_member = @idea.member_for(current_user)%>
+      <%if user_member.present?%>
+        <%= link_to "Unfollow", idea_member_path(@idea, user_member), method: :delete, class: 'btn btn-default btn-sm'%>
+      <%else%>
+        <%=link_to "Follow", idea_members_path(@idea), method: :post, class: 'btn btn-default btn-sm'%>
+      <%end%>
+      <%user_like = @idea.like_for(current_user)%>
+      <%if user_like.present?%>
+        <%= link_to "Dislike", idea_like_path(@idea, user_like), method: :delete, class: 'btn btn-default btn-sm'%>
+      <%else%>
+        <%=link_to "Like", idea_likes_path(@idea), method: :post, class: 'btn btn-default btn-sm'%>
+      <%end%>
+    </div>
+  </div>
+</div>
+
+<div class='spacing'></div>
+
+<div class='row'>
+  <div class='col-xs-offset-3 col-sm-offset-3 col-sm-2 col-xs-2'>
+    <h4>Comments</h4>
+  </div>
+</div>
+<div class='row'>
+  <div class='col-xs-offset-3 col-sm-offset-3 col-sm-6 col-xs-6'>
+    <hr />
+  </div>
+</div>
+
+<!-- DISPLAY COMMENTS BEGIN -->
+<div id='comments-display'>
+  <% @idea.comments.each do |comment| %>
+    <%= render 'comments/comment', comment: comment%>
+  <%end%>
+</div>
+
+<div class='spacing'></div>
+
+<!-- CREATE COMMENTS BEGIN -->
+<div class ='form-group'>
+  <%= form_for([@idea, @comment], html: {class: 'form-horizontal'}, remote: true) do |f| %>
+    <div class='row'>
+      <div class='col-xs-offset-3 col-xs-6'>
+        <%= f.text_area(:body, rows: 5, class: 'form-control span6')%>
+      </div>
+    </div>
+    <div class='spacing'/>
+    <div class='row'>
+      <div class='col-xs-offset-3 col-xs-2'>
+        <%= f.submit 'Post Comment', class:'btn btn-default btn-sm'%>
+      </div>
+    </div>
+  <%end%>
+</div>

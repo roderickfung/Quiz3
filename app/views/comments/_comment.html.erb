@@ -1,0 +1,33 @@
+<div id='<%=dom_id(comment)%>' class='comment-group'>
+  <div class='row'>
+    <div class='col-xs-offset-2 col-xs-1'>
+      <%=link_to 'Delete', idea_comment_path(comment.idea_id, comment.id), method: :delete, remote: true, class:'btn btn-secondary btn-xs align-right'%>
+    </div>
+    <div class='col-xs-3'>
+      <p><%=comment.user.full_name%> says:</p>
+    </div>
+  </div>
+
+  <div class='inner-spacing'></div>
+
+  <div class='row'>
+    <div class='col-xs-offset-3 col-xs-6'>
+      <div class='comment-body'>
+        <%=comment.body%>
+      </div>
+    </div>
+  </div>
+
+  <div class='spacing'></div>
+
+  <div class='row'>
+    <div class='col-xs-offset-3 col-xs-3'>
+      Created at: <%=comment.created_at.strftime("%Y-%m-%d %H:%M")%>
+    </div>
+  </div>
+  <div class='row'>
+    <div class='col-xs-offset-3 col-xs-6'>
+      <hr />
+    </div>
+  </div>
+</div>

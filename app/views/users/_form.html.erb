@@ -1,0 +1,47 @@
+<%= form_for(@user, html: {class: 'form-horizontal'}) do |f| %>
+  <% if @user.errors.any? %>
+    <div id='error_explanation'>
+      <h6><%=pluralize(@user.errors.count, 'error') %> prohibits user from being saved: </h6>
+      <ul>
+        <%= @user.errors.full_messages.each do |msg| %>
+          <li><%=msg%></li>
+        <%end%>
+      </ul>
+    </div>
+  <%end%>
+  <div class='form-group'>
+    <%= f.label :first_name, class:'control-label col-sm-2'%>
+    <div class='col-sm-4'>
+      <%= f.text_field :first_name, class:'form-control span4'%>
+    </div>
+  </div>
+  <div class='form-group'>
+    <%= f.label :last_name, class:'control-label col-sm-2'%>
+    <div class='col-sm-4'>
+      <%= f.text_field :last_name, class:'form-control span4'%>
+    </div>
+  </div>
+  <div class='form-group'>
+    <%= f.label :email, class:'control-label col-sm-2'%>
+    <div class='col-sm-4'>
+      <%= f.email_field :email, class:'form-control span4'%>
+    </div>
+  </div>
+  <div class='form-group'>
+    <%= f.label :password, class:'control-label col-sm-2'%>
+    <div class='col-sm-4'>
+      <%= f.password_field :password, class:'form-control span4'%>
+    </div>
+  </div>
+  <div class='form-group'>
+    <%= f.label :password_confirmation, class:'control-label col-sm-2'%>
+    <div class='col-sm-4'>
+      <%= f.password_field :password_confirmation, class:'form-control span4'%>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <%= f.submit 'Register', class:'btn btn-default' %>
+    </div>
+  </div>
+<%end%>

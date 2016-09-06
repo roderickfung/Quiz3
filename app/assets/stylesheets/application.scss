@@ -1,0 +1,84 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ */
+
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+.flash-message {
+  background-color: #888888;
+  color: white;
+ }
+
+ .navbar {
+   border-radius: 0;
+ }
+
+.paginate {
+  background-color: #cccccc;
+  color: white;
+  text-alignt: center;
+}
+
+.product-header {
+  margin-top: 3em;
+}
+
+.product-body {
+  margin: 2em 0em 2em 0em;
+}
+
+.sm-form-head {
+  padding-left: 15rem;
+}
+
+.float-right {
+  float: right;
+  clear: right;
+}
+
+.navbar {
+  background-color: #fff;
+}
+
+.nav-search {
+  margin: 7px 15px 0px 15px;
+}
+
+.show-dcrpt {
+  display: grid;
+}
+
+.spacing {
+  margin-top: 3rem;
+}
+
+.spacing-double {
+  margin-top: 6rem;
+}
+
+.btn-spacing {
+  margin-top: 1.5rem;
+}
+
+.inner-spacing{
+  margin-top: 0.3rem;
+}
+
+.title {
+
+}
+
+.align-right {
+  text-align: right;
+}
