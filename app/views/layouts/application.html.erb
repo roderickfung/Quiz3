@@ -59,6 +59,7 @@
         <div class='flash-message'>
           <center>
             <%=flash[:notice] || flash[:alert]%>
+            <p id='comment-failure' hidden='true'>Comment not deleted.</p>
           </center>
         </div>
         <%= yield %>

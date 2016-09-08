@@ -23,20 +23,22 @@
     <div class='row'>
       <div class='col-xs-2 col-sm-2'>
         <p style='text-align: right;'>
-
-          <%=idea.created_at.strftime("%Y-%m-%d %H:%M")%>
+          <%=idea.likes.count%> likes &nbsp;&nbsp;&nbsp; <%=idea.members.count%> followers
+        </p>
+        <p style='text-align: right;'>
+          <%=idea.created_at.strftime("%Y-%m-%d")%>
         </p>
       </div>
       <div class='col-xs-8 col-sm-8'>
         <p>
-          <%=idea.body%>
+          <%=truncate(idea.body, length: 500, omission:' ...')%>
         </p>
       </div>
     </div>
 
     <div class='row'>
       <div class='col-xs-offset-2 col-sm-offset-2 col-xs-2 col-sm-2'>
-        By <%=idea.user.full_name%>
+        <i>by <%=idea.user.full_name%></i>
       </div>
     </div>
 
@@ -61,7 +63,7 @@
       </div>
     </div>
 
-    <div class='spacing'/>
+    <div class='inner-spacing'/></div>
 
     <hr />
   <%end%>

@@ -19,7 +19,7 @@
 
 <div class='row'>
   <div class='col-xs-offset-2 col-sm-offset-2 col-xs-3 col-sm-3'>
-    Last Updated: <%=@idea.updated_at%>
+    <p><%=@idea.likes.count%> likes &nbsp;&nbsp;&nbsp; <%=@idea.members.count%> followers</p>
   </div>
 </div>
 
@@ -34,10 +34,10 @@
         </p>
     </div>
     <div class='col-xs-2 col-sm-2'>
+      <p>Followers:</p>
       <p>
-        Members Currently Following:
         <%@idea.members.each do |m|%>
-          <%=m.user.full_name%>
+          <%=m.user.full_name%>,
         <%end%>
       </p>
     </div>
@@ -47,12 +47,8 @@
 <div class='spacing'></div>
 
 <div class='row'>
-  <div class='col-xs-offset-2 col-sm-offset-2 col-xs-1 col-sm-1'>
-    <p><%=@idea.likes.count%> Like(s)</p>
-
-  </div>
-  <div class='col-xs-2 col-sm-2'>
-    <p><%=@idea.members.count%> Member(s)</p>
+  <div class='col-xs-offset-2 col-sm-offset-2 col-xs-1 col-sm-3'>
+    Last Updated: <%=@idea.updated_at%>
   </div>
 </div>
 

@@ -11,14 +11,14 @@ class CommentsController < ApplicationController
     respond_to do |format|
       if @comment.save
         format.html{
-          redirect_to idea_path(@idea), notice: 'Review Saved'
+          redirect_to idea_path(@idea), notice: 'Comment saved'
         }
         format.js{
           render :create
         }
       else
         format.html{
-          redirect_to idea_path(@idea), alert: 'Review Not Saved'
+          redirect_to idea_path(@idea), alert: 'Comment not saved.'
         }
         format.js{
           render :create_not_saved
@@ -36,14 +36,25 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    @comment.destroy
-    respond_to do |format|
-      format.html{
-        redirect_to idea_path(@idea), notice: "Idea Deleted Successfully"
-      }
-      format.js{
-        render
-      }
+    if @comment.user == current_user || @comment.idea.user == current_user
+      respond_to do |format|
+      @comment.destroy
+        format.html{
+          redirect_to idea_path(@idea), notice: "Comment deleted"
+        }
+        format.js{
+          render :destroy
+        }
+      end
+    else
+      respond_to do |format|
+        format.html {
+          redirect_to idea_path(@idea), alert: 'Could not delete comment'
+        }
+        format.js{
+          render :destroy_fail
+        }
+      end
     end
   end
 
